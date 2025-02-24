@@ -42,6 +42,9 @@ const CreateBooks = () => {
             <option value="Horror">Horror</option>
             <option value="Motivational">Motivational</option>
             <option value="History">History</option>
+            <option value="Biography">Biography</option>
+            <option value="Communication">Communication</option>
+            <option value="Technology">Technology</option>
             <option value="others">others</option>
           </select>
         </div>
