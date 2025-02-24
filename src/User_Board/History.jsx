@@ -161,7 +161,7 @@ export default function History() {
                 {book.pdf && (
                   <button
                     onClick={() => handleReadNowClick(book.pdf)}
-                    className="w-full absolute bottom-3 left-3 w-[224.5px] block text-center bg-[#f79c29] text-white py-2 rounded-md hover:bg-[#271138] transition"
+                    className="w-full absolute bottom-3 left-3 max-w-[225px] block text-center bg-[#f79c29] text-white py-2 rounded-md hover:bg-[#271138] transition"
                   >
                     Read Now
                   </button>
@@ -200,7 +200,7 @@ export default function History() {
                 {book.pdf && (
                   <button
                     onClick={() => handleReadNowClick(book.pdf)}
-                    className="w-full absolute bottom-3 left-3 w-[224.5px] block text-center bg-[#f79c29] text-white py-2 rounded-md hover:bg-[#271138] transition"
+                    className="w-full absolute bottom-3 left-3 max-w-[225px] block text-center bg-[#f79c29] text-white py-2 rounded-md hover:bg-[#271138] transition"
                   >
                     Read Now
                   </button>
@@ -239,7 +239,7 @@ export default function History() {
                 {book.pdf && (
                   <button
                     onClick={() => handleReadNowClick(book.pdf)}
-                    className="w-full absolute bottom-3 left-3 w-[224.5px] block text-center bg-[#f79c29] text-white py-2 rounded-md hover:bg-[#271138] transition"
+                    className="w-full absolute bottom-3 left-3 max-w-[225px] block text-center bg-[#f79c29] text-white py-2 rounded-md hover:bg-[#271138] transition"
                   >
                     Read Now
                   </button>
@@ -279,7 +279,7 @@ export default function History() {
                   {book.pdf && (
                     <button
                       onClick={() => handleReadNowClick(book.pdf)}
-                      className="w-full absolute bottom-3 left-3 w-[224.5px] block text-center bg-[#f79c29] text-white py-2 rounded-md hover:bg-[#271138] transition"
+                      className="w-full absolute bottom-3 left-3 max-w-[225px] block text-center bg-[#f79c29] text-white py-2 rounded-md hover:bg-[#271138] transition"
                     >
                       Read Now
                     </button>
@@ -320,7 +320,7 @@ export default function History() {
                   {book.pdf && (
                     <button
                       onClick={() => handleReadNowClick(book.pdf)}
-                      className="w-full absolute bottom-3 left-3 w-[224.5px] block text-center bg-[#f79c29] text-white py-2 rounded-md hover:bg-[#271138] transition"
+                      className="w-full absolute bottom-3 left-3 max-w-[225px] block text-center bg-[#f79c29] text-white py-2 rounded-md hover:bg-[#271138] transition"
                     >
                       Read Now
                     </button>
@@ -361,7 +361,7 @@ export default function History() {
                   {book.pdf && (
                     <button
                       onClick={() => handleReadNowClick(book.pdf)}
-                      className="w-full absolute bottom-3 left-3 w-[224.5px] block text-center bg-[#f79c29] text-white py-2 rounded-md hover:bg-[#271138] transition"
+                      className="w-full absolute bottom-3 left-3 max-w-[225px] block text-center bg-[#f79c29] text-white py-2 rounded-md hover:bg-[#271138] transition"
                     >
                       Read Now
                     </button>
@@ -402,7 +402,7 @@ export default function History() {
                   {book.pdf && (
                     <button
                       onClick={() => handleReadNowClick(book.pdf)}
-                      className="w-full absolute bottom-3 left-3 w-[224.5px] block text-center bg-[#f79c29] text-white py-2 rounded-md hover:bg-[#271138] transition"
+                      className="w-full absolute bottom-3 left-3 max-w-[225px] block text-center bg-[#f79c29] text-white py-2 rounded-md hover:bg-[#271138] transition"
                     >
                       Read Now
                     </button>
