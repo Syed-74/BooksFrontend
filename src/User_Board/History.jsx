@@ -54,13 +54,15 @@ export default function History() {
 
   const handleReadNowClick = (pdf) => {
     const token = localStorage.getItem("token");
-
+    console.log(pdf);
     if (token) {
-      window.open(`http://localhost:7000/books/pdf/${pdf}`, "_blank");
+      // Pass the PDF URL in the state object when navigating.
+      navigate('/MyPdfViewer', { state: { pdfUrl: `http://localhost:7000/books/pdf/${pdf}` } });
     } else {
       setIsLoginOpen(true);
     }
   };
+
 
   const handleLoginSuccess = () => {
     localStorage.setItem("token", "your-login-token"); // Ensure token is stored
@@ -139,7 +141,7 @@ export default function History() {
             historyBooks.map((book) => (
               <div
                 key={book._id}
-                className="w-64 bg-white shadow-lg rounded-lg p-4 flex-shrink-0 border border-gray-200 hover:shadow-xl transition duration-500 transform hover:scale-105 hover:rotate"
+                className="w-64 bg-white hover:border hover:border-blue-500 shadow-lg rounded-lg p-4 flex-shrink-0 border border-gray-200 hover:shadow-xl transition duration-500 transform hover:scale-105 hover:rotate"
               >
                 {book.image ? (
                   <img
@@ -178,7 +180,7 @@ export default function History() {
             motivationalBooks.map((book) => (
               <div
                 key={book._id}
-                className="w-64 bg-white shadow-lg rounded-lg p-4 flex-shrink-0 border border-gray-200 hover:shadow-xl transition duration-500 transform hover:scale-105 hover:rotate"
+                className="w-64 bg-white hover:border hover:border-blue-500 shadow-lg rounded-lg p-4 flex-shrink-0 border border-gray-200 hover:shadow-xl transition duration-500 transform hover:scale-105 hover:rotate"
               >
                 {book.image ? (
                   <img
@@ -217,7 +219,7 @@ export default function History() {
             horrorBooks.map((book) => (
               <div
                 key={book._id}
-                className="w-64 bg-white shadow-lg rounded-lg p-4 flex-shrink-0 border border-gray-200 hover:shadow-xl transition duration-500 transform hover:scale-105 hover:rotate"
+                className="w-64 bg-white hover:border hover:border-blue-500 shadow-lg rounded-lg p-4 flex-shrink-0 border border-gray-200 hover:shadow-xl transition duration-500 transform hover:scale-105 hover:rotate"
               >
                 {book.image ? (
                   <img
@@ -252,12 +254,12 @@ export default function History() {
       {communicationBooks.length > 0 && (
         <>
           <h2 className="text-2xl font-bold">📚 Communication Books</h2>
-          <div className="flex space-x-6 overflow-x-auto scrollbar-hide no-scrollbar p-4 h-[360px] w-[100%]">
+          <div className="flex space-x-6  overflow-x-auto scrollbar-hide no-scrollbar p-4 h-[360px] w-[100%]">
             {communicationBooks.length > 0 ? (
               communicationBooks.map((book) => (
                 <div
                   key={book._id}
-                  className="w-64 bg-white shadow-lg rounded-lg p-4 flex-shrink-0 border border-gray-200 hover:shadow-xl transition duration-500 transform hover:scale-105 hover:rotate"
+                  className="w-64 bg-white hover:border hover:border-blue-500 shadow-lg rounded-lg p-4 flex-shrink-0 border border-gray-200 hover:shadow-xl transition duration-500 transform hover:scale-105 hover:rotate"
                 >
                   {book.image ? (
                     <img
@@ -293,12 +295,12 @@ export default function History() {
       {biographyBooks.length > 0 && (
         <>
           <h2 className="text-2xl font-bold">📚 Biography Books</h2>
-          <div className="flex space-x-6 overflow-x-auto scrollbar-hide no-scrollbar p-4 h-[360px] w-[100%]">
+          <div className="flex space-x-6 hover:border-blue-500 overflow-x-auto scrollbar-hide no-scrollbar p-4 h-[360px] w-[100%]">
             {biographyBooks.length > 0 ? (
               biographyBooks.map((book) => (
                 <div
                   key={book._id}
-                  className="w-64 bg-white shadow-lg rounded-lg p-4 flex-shrink-0 border border-gray-200 hover:shadow-xl transition duration-500 transform hover:scale-105 hover:rotate"
+                  className="w-64 bg-white hover:border hover:border-blue-500 shadow-lg rounded-lg p-4 flex-shrink-0 border border-gray-200 hover:shadow-xl transition duration-500 transform hover:scale-105 hover:rotate"
                 >
                   {book.image ? (
                     <img
@@ -339,7 +341,7 @@ export default function History() {
               technologyBooks.map((book) => (
                 <div
                   key={book._id}
-                  className="w-64 bg-white shadow-lg rounded-lg p-4 flex-shrink-0 border border-gray-200 hover:shadow-xl transition duration-500 transform hover:scale-105 hover:rotate"
+                  className="w-64 bg-white hover:border hover:border-blue-500 shadow-lg rounded-lg p-4 flex-shrink-0 border border-gray-200 hover:shadow-xl transition duration-500 transform hover:scale-105 hover:rotate"
                 >
                   {book.image ? (
                     <img
@@ -380,7 +382,7 @@ export default function History() {
               otherBooks.map((book) => (
                 <div
                   key={book._id}
-                  className="w-64 bg-white shadow-lg rounded-lg p-4 flex-shrink-0 border border-gray-200 hover:shadow-xl transition duration-500 transform hover:scale-105 hover:rotate"
+                  className="w-64 bg-white hover:border hover:border-blue-500 shadow-lg rounded-lg p-4 flex-shrink-0 border border-gray-200 hover:shadow-xl transition duration-500 transform hover:scale-105 hover:rotate"
                 >
                   {book.image ? (
                     <img

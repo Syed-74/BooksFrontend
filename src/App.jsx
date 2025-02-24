@@ -10,6 +10,7 @@ import User from "./component/Home";
 import Templates from "./Admin_Dashboard/Templates";
 import CreateBooks from "./Admin_Dashboard/CreateBooks";
 import Pagenotfound from "./component/Pagenotfound";
+import MyPdfViewer from "./User_Board/PdfFile_Viewer";
 
 const App = () => {
   const [userRole, setUserRole] = useState(localStorage.getItem("role"));
@@ -41,6 +42,7 @@ const App = () => {
         <Route path="/admin" element={userRole === "admin" ? <Admin onLogout={handleLogout} /> : <Navigate to="/admin" />} />
         <Route path="/" element={userRole === "user" ? <User onLogout={handleLogout} /> : <Navigate to="/" />} />
         <Route path="/templates" element={<Templates />} />
+        <Route path="/MyPdfViewer" element={<MyPdfViewer />} />
         <Route path="/createBooks" element={<CreateBooks />} /> 
       </Routes>
 
