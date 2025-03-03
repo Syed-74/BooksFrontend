@@ -9,18 +9,23 @@ const AuthProvider = ({ children }) => {
     const [isRegisterOpen, setIsRegisterOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
+    const [allBooks, setAllBooks] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('') // Search input state
 
     useEffect(() => {
         const token = localStorage.getItem("token");
         setIsLoggedIn(!!token);
-    }, []);
+    }, [loading]);
 
     const handleSuccessLogin = () => {
         setIsLoggedIn(true);
     }
     const handleLoginfailure = () => {
         setIsLoggedIn(false);
+    }
+
+    const handleSearchQuery = (searchQuery) => {
+        setSearchQuery(searchQuery)
     }
 
     const Login = async (email, password, onClose, onLoginSuccess) => {
@@ -102,11 +107,25 @@ const AuthProvider = ({ children }) => {
         navigate("/"); // Redirect to home after logout
     };
 
+    // TODO Retrieve all Books
+    useEffect(() => {
+        axios
+            .get(`https://books-hlyv.onrender.com/v2/allbooks`)
+            .then((res) => {
+                setAllBooks(Array.isArray(res.data) ? res.data : []);
+            })
+            .catch((err) => {
+                console.error("Error fetching books:", err);
+                setAllBooks([]);
+            });
+    }, []);
+
 
     const value = {
         Login, loading, handleLogout,
         isLoggedIn,
-        isLoginOpen, Register, handleSuccessLogin,handleLoginfailure
+        isLoginOpen, Register, handleSuccessLogin,
+        handleLoginfailure, allBooks,handleSearchQuery,searchQuery
     }
     return (
         <AuthContext.Provider value={value}>

@@ -1,9 +1,10 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"; // For redirection
 import Login from "../component/Login";
 import Register from "../component/Register";
-
+import { AuthContext } from "../component/AuthProvider";
+import { createContext } from "react";
 export default function BooksDashboard() {
   const [books, setBooks] = useState([]);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -12,35 +13,38 @@ export default function BooksDashboard() {
   const [message, setMessage] = useState("");
   const category = "History";
   const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState(""); // Search input state
-  const [allBooks, setAllBooks] = useState([]);
-//  console.log(allBooks);
-  useEffect(() => {
-    axios
-      .get(`https://books-hlyv.onrender.com/books/${category}`)
-      .then((res) => {
-        setBooks(Array.isArray(res.data) ? res.data : []);
-      })
-      .catch((err) => {
-        console.error("Error fetching books:", err);
-        setBooks([]);
-      });
-  }, []);
+  // const [searchQuery, setSearchQuery] = useState(""); // Search input state
+  // const [allBooks, setAllBooks] = useState([]);
 
-  // TODO Retrieve all Books
-  useEffect(() => {
-    axios
-      .get(`https://books-hlyv.onrender.com/v2/allbooks`)
-      .then((res) => {
-        setAllBooks(Array.isArray(res.data) ? res.data : []);
-      })
-      .catch((err) => {
-        console.error("Error fetching books:", err);
-        setAllBooks([]);
-      });
-  }, []);
+const {allBooks,searchQuery}=useContext(AuthContext)
+
+  // useEffect(() => {
+  //   axios
+  //     .get(`https://books-hlyv.onrender.com/books/${category}`)
+  //     .then((res) => {
+  //       setBooks(Array.isArray(res.data) ? res.data : []);
+  //     })
+  //     .catch((err) => {
+  //       console.error("Error fetching books:", err);
+  //       setBooks([]);
+  //     });
+  // }, []);
+
+  // // TODO Retrieve all Books
+  // useEffect(() => {
+  //   axios
+  //     .get(`https://books-hlyv.onrender.com/v2/allbooks`)
+  //     .then((res) => {
+  //       setAllBooks(Array.isArray(res.data) ? res.data : []);
+  //     })
+  //     .catch((err) => {
+  //       console.error("Error fetching books:", err);
+  //       setAllBooks([]);
+  //     });
+  // }, []);
 
   // Ensure UI updates when login state changes
+  
   useEffect(() => {
     const handleStorageChange = () => {
       setIsLoggedIn(!!localStorage.getItem("token"));
@@ -120,7 +124,7 @@ export default function BooksDashboard() {
 
   return (
     <div className="p-0 md:p-6 bg-white flex flex-col gap-5">
-      <div className="flex justify-center my-6">
+      {/* <div className="flex justify-center my-6">
         <input
           type="text"
           placeholder="Search books..."
@@ -128,7 +132,7 @@ export default function BooksDashboard() {
           onChange={(e) => setSearchQuery(e.target.value)}
           className="w-full lg:w-1/2 px-4 py-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
-      </div>
+      </div> */}
       {message && (
         <div className="mb-4 p-3 bg-green-100 text-green-700 rounded">
           {message}

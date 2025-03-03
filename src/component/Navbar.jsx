@@ -10,20 +10,25 @@ const Navbar = () => {
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState(""); // Search input state
 
   // Check login status on page load
-  const { isLoggedIn, handleSuccessLogin, handleLoginfailure } = useContext(AuthContext)
+  const { isLoggedIn, handleSuccessLogin, handleLoginfailure, handleSearchQuery } = useContext(AuthContext)
 
   const handleLoginSuccess = () => {
     handleSuccessLogin();
     setIsLoginOpen(false);
   };
 
+  useEffect(() => {
+    handleSearchQuery(searchQuery)
+  }, [searchQuery]);
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
     handleLoginfailure(),
-    navigate("/");
+      navigate("/");
   };
 
   return (
@@ -45,10 +50,18 @@ const Navbar = () => {
         />
 
         {/* 🔹 Centered Text (Hidden on Small Screens) */}
-        <h1 className="hidden md:block text-xl md:text-2xl font-semibold text-black">
+        {/* <h1 className="hidden md:block text-xl md:text-2xl font-semibold text-black">
           Welcome to Our Website
-        </h1>
-
+        </h1> */}
+        <div className="flex w-full justify-center my-6">
+          <input
+            type="text"
+            placeholder="Search by book name ,title..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full lg:w-1/2 px-4 py-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
         {/* 🔹 Login/Logout Button */}
         <div className="hidden md:block">
           {isLoggedIn ? (
