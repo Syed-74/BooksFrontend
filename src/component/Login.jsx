@@ -45,15 +45,16 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthProvider";
 const Login = ({ isOpen, onClose, onOpenRegister, onLoginSuccess }) => {
   const [loginData, setLoginData] = useState({ email: "", password: "" });
-  // const [loading, setLoading] = useState(false);
+  
   const navigate = useNavigate();
   const { Login,loading } = useContext(AuthContext)
   // Prevent rendering if modal is closed
   if (!isOpen) return null;
 
   // Handle login
-  const handleLogin = async () => {
-    Login(loginData.email, loginData.password)
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    Login(loginData.email, loginData.password,onClose,onLoginSuccess)
 
     // const { email, password } = loginData;
 

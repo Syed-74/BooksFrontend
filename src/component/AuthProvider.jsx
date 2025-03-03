@@ -2,14 +2,13 @@ import React, { createContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 export const AuthContext = createContext(null)
-const AuthProvider = ({ children, isOpen, onClose, onOpenRegister, onLoginSuccess }) => {
+const AuthProvider = ({ children }) => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [isLoginOpen, setIsLoginOpen] = useState(false);
     const [isRegisterOpen, setIsRegisterOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    console.log(isLoginOpen, 'isLogin')
 
 
     useEffect(() => {
@@ -17,22 +16,16 @@ const AuthProvider = ({ children, isOpen, onClose, onOpenRegister, onLoginSucces
         setIsLoggedIn(!!token);
     }, []);
 
-    const handleLoginSuccess = () => {
+    const handleSuccessLogin = () => {
         setIsLoggedIn(true);
-        setIsLoginOpen(false); // Close login modal after successful login
-    };
+    }
+    const handleLoginfailure = () => {
+        setIsLoggedIn(false);
+    }
 
-    // const onClose = () => {
-    //     setIsLoginOpen(false)
-    // }
-
-    // const isOpen = () => {
-    //     setIsLoggedIn(true)
-    // }
-
-    const Login = async (email, password) => {
+    const Login = async (email, password, onClose, onLoginSuccess) => {
         console.log(email, password)
-
+        console.log(onClose, 'onClose')
         if (!email || !password) {
             alert("Please enter email and password");
             return;
@@ -40,7 +33,7 @@ const AuthProvider = ({ children, isOpen, onClose, onOpenRegister, onLoginSucces
 
         try {
             setLoading(true);
-            const  response  = await axios.post("https://books-hlyv.onrender.com/api/auth/login", { email, password });
+            const response = await axios.post("https://books-hlyv.onrender.com/api/auth/login", { email, password });
 
             const { token, role } = response.data;
             console.log("User Role:", role);
@@ -57,7 +50,7 @@ const AuthProvider = ({ children, isOpen, onClose, onOpenRegister, onLoginSucces
 
             onClose(); // Close modal
 
-            // Navigate based on role
+
             navigate(role === "admin" ? "/admin" : "/");
 
         } catch (error) {
@@ -67,6 +60,40 @@ const AuthProvider = ({ children, isOpen, onClose, onOpenRegister, onLoginSucces
             setLoading(false);
         }
     }
+
+    // register
+    const Register = async (email, password, confirmPassword, onClose, onOpenLogin, isOpen) => {
+
+        // Simple validation
+        if (!email || !password || !confirmPassword) {
+            alert("All fields are required");
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match");
+            return;
+        }
+
+        try {
+            // Call your backend API here to register the user
+            await axios.post('https://books-hlyv.onrender.com/api/auth/register', {
+                email,
+                password,
+                confirmPassword
+            });
+
+            console.log("User registered successfully:", userRegister);
+
+            // Close the sign-up modal and open the login modal
+            onClose();
+            onOpenLogin();
+        } catch (error) {
+            console.error("Registration failed:", error);
+            alert("Registration failed. Please try again.");
+        }
+    };
+
     // Logout funtion
     const handleLogout = () => {
         localStorage.removeItem("token");
@@ -78,8 +105,8 @@ const AuthProvider = ({ children, isOpen, onClose, onOpenRegister, onLoginSucces
 
     const value = {
         Login, loading, handleLogout,
-        isLoggedIn, 
-        isLoginOpen, 
+        isLoggedIn,
+        isLoginOpen, Register, handleSuccessLogin,handleLoginfailure
     }
     return (
         <AuthContext.Provider value={value}>

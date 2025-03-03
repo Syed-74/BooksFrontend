@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
-
+import { AuthContext } from "./AuthProvider";
+import { useContext } from "react";
 const Register = ({ isOpen, onClose, onOpenLogin }) => {
   // Define the state to store user input
   const [userRegister, setUserRegister] = useState({
@@ -10,41 +11,12 @@ const Register = ({ isOpen, onClose, onOpenLogin }) => {
   });
 
   if (!isOpen) return null;
-
+  const { Register } = useContext(AuthContext)
   // Handle user registration logic
-  const handleRegister = async () => {
-    const { email, password, confirmPassword } = userRegister;
-  
-    // Simple validation
-    if (!email || !password || !confirmPassword) {
-      alert("All fields are required");
-      return;
-    }
-  
-    if (password !== confirmPassword) {
-      alert("Passwords do not match");
-      return;
-    }
-  
-    try {
-      // Call your backend API here to register the user
-      await axios.post('https://books-hlyv.onrender.com/api/auth/register', {
-        email,
-        password,
-        confirmPassword 
-      });
-  
-      console.log("User registered successfully:", userRegister);
-  
-      // Close the sign-up modal and open the login modal
-      onClose();
-      onOpenLogin();
-    } catch (error) {
-      console.error("Registration failed:", error);
-      alert("Registration failed. Please try again.");
-    }
+  const handleRegister = () => {
+    Register(userRegister.email,userRegister.password,userRegister.confirmPassword, onClose, onOpenLogin)
   };
-  
+
   // Handle input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;

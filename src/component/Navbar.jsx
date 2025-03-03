@@ -1,38 +1,35 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
 import { FaSignOutAlt, FaBars } from "react-icons/fa";
+import { AuthContext } from "./AuthProvider";
 
 const Navbar = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   // Check login status on page load
-  useEffect(() => {
-    const token = localStorage.getItem("token");  
-    setIsLoggedIn(!!token);
-  }, []);
+  const { isLoggedIn, handleSuccessLogin, handleLoginfailure } = useContext(AuthContext)
 
   const handleLoginSuccess = () => {
-    setIsLoggedIn(true);
-    setIsLoginOpen(false); // Close login modal after successful login
+    handleSuccessLogin();
+    setIsLoginOpen(false);
   };
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
-    setIsLoggedIn(false);
-    navigate("/"); // Redirect to home after logout
+    handleLoginfailure(),
+    navigate("/");
   };
 
   return (
     <>
       <nav className="flex items-center justify-between bg-[#CCD7E6] h-20 shadow-md px-4 md:px-16">
-        {/* 🔹 Mobile Menu Button */}
+
         <button
           className="md:hidden text-gray-700 text-2xl"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -60,7 +57,6 @@ const Navbar = () => {
               className="flex items-center space-x-2 bg-red-500 hover:bg-red-800 px-5 py-2 rounded-md text-white transition"
             >
               <FaSignOutAlt />
-              {/* <span>Logout</span> */}
             </button>
           ) : (
             <button
@@ -105,24 +101,25 @@ const Navbar = () => {
       )}
 
       {/* 🔹 Login & Register Popups */}
-      <Login
-        isOpen={isLoginOpen}
+      {isLoginOpen && <Login
+        isOpen={() => setIsLoginOpen(true)}
         onClose={() => setIsLoginOpen(false)}
         onLoginSuccess={handleLoginSuccess}
         onOpenRegister={() => {
           setIsRegisterOpen(true);
           setIsLoginOpen(false);
         }}
-      />
-
-      <Register
-        isOpen={isRegisterOpen}
-        onClose={() => setIsRegisterOpen(false)}
-        onOpenLogin={() => {
-          setIsLoginOpen(true);
-          setIsRegisterOpen(false);
-        }}
-      />
+      />}
+      {
+        isRegisterOpen &&
+        <Register
+          isOpen={() => setIsRegisterOpen(true)}
+          onClose={() => setIsRegisterOpen(false)}
+          onOpenLogin={() => {
+            setIsLoginOpen(true);
+            setIsRegisterOpen(false);
+          }}
+        />}
     </>
   );
 };
