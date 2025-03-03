@@ -39,55 +39,57 @@
 // export default Login;
 
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { AuthContext } from "./AuthProvider";
 const Login = ({ isOpen, onClose, onOpenRegister, onLoginSuccess }) => {
   const [loginData, setLoginData] = useState({ email: "", password: "" });
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
+  const { Login,loading } = useContext(AuthContext)
   // Prevent rendering if modal is closed
   if (!isOpen) return null;
 
   // Handle login
   const handleLogin = async () => {
-    const { email, password } = loginData;
+    Login(loginData.email, loginData.password)
 
-    if (!email || !password) {
-      alert("Please enter email and password");
-      return;
-    }
+    // const { email, password } = loginData;
 
-    try {
-      setLoading(true);
-      const response = await axios.post("http://localhost:7000/api/auth/login", { email, password });
+    // if (!email || !password) {
+    //   alert("Please enter email and password");
+    //   return;
+    // }
 
-      const { token, role } = response.data;
-      console.log("User Role:", role);
+    // try {
+    //   setLoading(true);
+    //   const response = await axios.post("https://books-hlyv.onrender.com/api/auth/login", { email, password });
 
-      localStorage.setItem("token", token);
-      localStorage.setItem("role", role);
+    //   const { token, role } = response.data;
+    //   console.log("User Role:", role);
 
-      alert("✅ Login successful!");
+    //   localStorage.setItem("token", token);
+    //   localStorage.setItem("role", role);
 
-      // Call parent function to handle login state
-      if (onLoginSuccess) {
-        onLoginSuccess(role);
-      }
+    //   alert("✅ Login successful!");
 
-      onClose(); // Close modal
+    //   // Call parent function to handle login state
+    //   if (onLoginSuccess) {
+    //     onLoginSuccess(role);
+    //   }
 
-      // Navigate based on role
-      navigate(role === "admin" ? "/admin" : "/");
+    //   onClose(); // Close modal
 
-    } catch (error) {
-      console.error("❌ Login failed:", error.response?.data || error.message);
-      alert("❌ Invalid credentials. Please try again.");
-    } finally {
-      setLoading(false);
-    }
+    //   // Navigate based on role
+    //   navigate(role === "admin" ? "/admin" : "/");
+
+    // } catch (error) {
+    //   console.error("❌ Login failed:", error.response?.data || error.message);
+    //   alert("❌ Invalid credentials. Please try again.");
+    // } finally {
+    //   setLoading(false);
+    // }
   };
 
   return (
@@ -126,13 +128,13 @@ const Login = ({ isOpen, onClose, onOpenRegister, onLoginSuccess }) => {
             onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#f79c29] transition"
           />
-          <h1 className="absolute right-0 text-blue-600">Forgotten Password?</h1>
+          {/* <h1 className="absolute right-0 text-blue-600">Forgotten Password?</h1> */}
         </div>
 
         {/* Login Button */}
         <button
           onClick={handleLogin}
-          className={`w-full text-white font-semibold py-2 mt-7 rounded-md transition ${loading ? "bg-[#271138]" : "bg-[#f79c29] hover:bg-[#271138]"}`}
+          className={`w-full text-white font-semibold py-2 mt-7 rounded-md transition ${loading ? "bg-[#271138]" : "bg-[#3F5678] text-white hover:bg-[#CCD7E6]"}`}
           disabled={loading}
         >
           {loading ? "Logging in..." : "Login"}
@@ -141,7 +143,7 @@ const Login = ({ isOpen, onClose, onOpenRegister, onLoginSuccess }) => {
         {/* Sign Up Link */}
         <p className="mt-4 text-center text-[#271138] font-semibold">
           Don't have an account?{" "}
-          <button onClick={onOpenRegister} className="text-[#f79c29] hover:underline font-semibold">
+          <button onClick={onOpenRegister} className="text-[#3F5678] hover:underline font-semibold">
             Sign Up
           </button>
         </p>

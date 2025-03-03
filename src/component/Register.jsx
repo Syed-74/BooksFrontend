@@ -28,7 +28,7 @@ const Register = ({ isOpen, onClose, onOpenLogin }) => {
   
     try {
       // Call your backend API here to register the user
-      await axios.post('http://localhost:7000/api/auth/register', {
+      await axios.post('https://books-hlyv.onrender.com/api/auth/register', {
         email,
         password,
         confirmPassword 
@@ -62,7 +62,7 @@ const Register = ({ isOpen, onClose, onOpenLogin }) => {
           ❌
         </button>
 
-        <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
+        <h2 className="text-2xl font-bold mb-4 text-[#271138]">Sign Up</h2>
 
         {/* Email Input */}
         <input
@@ -95,14 +95,14 @@ const Register = ({ isOpen, onClose, onOpenLogin }) => {
         />
 
         {/* Sign-Up Button */}
-        <button onClick={handleRegister} className="bg-blue-500 mt-6 text-white px-4 py-2 rounded-md w-full">
+        <button onClick={handleRegister} className="bg-[#3F5678] hover:bg-[#CCD7E6] mt-6 text-white font-semibold px-4 py-2 rounded-md w-full">
           Sign Up
         </button>
 
         {/* Login Link (opens Login popup) */}
-        <p className="mt-4 text-center">
+        <p className="mt-4 text-center text-[#271138]">
           Already have an account?
-          <button onClick={onOpenLogin} className="text-blue-500 ml-1">
+          <button onClick={onOpenLogin} className="text-[#3F5678] font-semibold ml-1">
             Log In
           </button>
         </p>

@@ -13,7 +13,7 @@ const Navbar = () => {
 
   // Check login status on page load
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");  
     setIsLoggedIn(!!token);
   }, []);
 
@@ -31,7 +31,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="flex items-center justify-between bg-white h-20 shadow-md px-4 md:px-16">
+      <nav className="flex items-center justify-between bg-[#CCD7E6] h-20 shadow-md px-4 md:px-16">
         {/* 🔹 Mobile Menu Button */}
         <button
           className="md:hidden text-gray-700 text-2xl"
@@ -42,13 +42,13 @@ const Navbar = () => {
 
         {/* 🔹 Logo */}
         <img
-          src="/Reading-book-logo-by-nuranitalutfiana92.jpg"
+          src="/Reading-book-logo-by-nuranitalutfiana92-removebg-preview.png"
           alt="Logo"
-          className="w-28 h-16 md:w-36 md:h-20"
+          className="w-28 h-16 md:w-36 md:h-20 bg-[#CCD7E6]"
         />
 
         {/* 🔹 Centered Text (Hidden on Small Screens) */}
-        <h1 className="hidden md:block text-xl md:text-2xl font-semibold text-[#271138]">
+        <h1 className="hidden md:block text-xl md:text-2xl font-semibold text-black">
           Welcome to Our Website
         </h1>
 
@@ -57,10 +57,10 @@ const Navbar = () => {
           {isLoggedIn ? (
             <button
               onClick={handleLogout}
-              className="flex items-center space-x-2 bg-red-500 hover:bg-red-600 px-5 py-2 rounded-md text-white transition"
+              className="flex items-center space-x-2 bg-red-500 hover:bg-red-800 px-5 py-2 rounded-md text-white transition"
             >
               <FaSignOutAlt />
-              <span>Logout</span>
+              {/* <span>Logout</span> */}
             </button>
           ) : (
             <button
@@ -68,7 +68,7 @@ const Navbar = () => {
                 setIsLoginOpen(true);
                 setIsRegisterOpen(false);
               }}
-              className="flex items-center space-x-2 bg-[green-500] hover:bg-[#f79c29] px-5 py-2 rounded-md  transition"
+              className="flex items-center space-x-2 bg-[green-500] hover:bg-[#3F5678] px-5 py-2 rounded-md  transition"
             >
               <FaSignOutAlt />
               <span className="font-bold">Login</span>
@@ -87,7 +87,7 @@ const Navbar = () => {
               className="flex items-center space-x-2 bg-red-500 hover:bg-red-600 px-5 py-2 rounded-md text-white transition"
             >
               <FaSignOutAlt />
-              <span>Logout</span>
+              {/* <span>Logout</span> */}
             </button>
           ) : (
             <button

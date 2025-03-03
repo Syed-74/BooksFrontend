@@ -19,7 +19,7 @@ const CreateBooks = () => {
     if (pdf) formData.append("pdf", pdf);
 
     try {
-      await axios.post("http://localhost:7000/books", formData);
+      await axios.post("https://books-hlyv.onrender.com/books", formData);
       setMessage("Book added successfully!");
     } catch (error) {
       setMessage("Error adding book.");

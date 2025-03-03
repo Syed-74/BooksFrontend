@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"; // For redirection
 import Login from "../component/Login";
 import Register from "../component/Register";
 
-export default function History() {
+export default function BooksDashboard() {
   const [books, setBooks] = useState([]);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
@@ -14,10 +14,10 @@ export default function History() {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState(""); // Search input state
   const [allBooks, setAllBooks] = useState([]);
-
+//  console.log(allBooks);
   useEffect(() => {
     axios
-      .get(`http://localhost:7000/books/${category}`)
+      .get(`https://books-hlyv.onrender.com/books/${category}`)
       .then((res) => {
         setBooks(Array.isArray(res.data) ? res.data : []);
       })
@@ -30,7 +30,7 @@ export default function History() {
   // TODO Retrieve all Books
   useEffect(() => {
     axios
-      .get(`http://localhost:7000/v2/allbooks`)
+      .get(`https://books-hlyv.onrender.com/v2/allbooks`)
       .then((res) => {
         setAllBooks(Array.isArray(res.data) ? res.data : []);
       })
@@ -57,7 +57,7 @@ export default function History() {
     console.log(pdf);
     if (token) {
       // Pass the PDF URL in the state object when navigating.
-      navigate('/MyPdfViewer', { state: { pdfUrl: `http://localhost:7000/books/pdf/${pdf}` } });
+      navigate('/MyPdfViewer', { state: { pdfUrl: `https://books-hlyv.onrender.com/books/pdf/${pdf}` } });
     } else {
       setIsLoginOpen(true);
     }
@@ -119,7 +119,7 @@ export default function History() {
   ]);
 
   return (
-    <div className="p-0 md:p-6 bg-gray-100 flex flex-col gap-5">
+    <div className="p-0 md:p-6 bg-white flex flex-col gap-5">
       <div className="flex justify-center my-6">
         <input
           type="text"
@@ -145,23 +145,23 @@ export default function History() {
               >
                 {book.image ? (
                   <img
-                    src={`http://localhost:7000/uploads/${book.image}`}
+                    src={`https://books-hlyv.onrender.com/uploads/${book.image}`}
                     alt={book.bookName}
                     className="w-full h-40 object-contain rounded-md mb-3"
                   />
                 ) : (
                   <p className="text-gray-500">No Image</p>
                 )}
-                <h2 className="text-lg font-semibold text-[#271138] line-clamp-2">
+                <h2 className="text-lg font-semibold text-black line-clamp-2">
                   {book.bookName}
                 </h2>
-                <h1 className="text-[#f79c29] text-sm mb-2 line-clamp-2">
+                <h1 className="text-[#3F5678] text-sm mb-2 line-clamp-2">
                   {book.authorName}
                 </h1>
                 {book.pdf && (
                   <button
                     onClick={() => handleReadNowClick(book.pdf)}
-                    className="w-full absolute bottom-3 left-3 max-w-[225px] block text-center bg-[#f79c29] text-white py-2 rounded-md hover:bg-[#271138] transition"
+                    className="w-full absolute bottom-3 left-3 max-w-[225px] block text-center bg-white text-[#3F5678] py-2 rounded-md hover:bg-[#CCD7E6] font-bold transition"
                   >
                     Read Now
                   </button>
@@ -184,23 +184,23 @@ export default function History() {
               >
                 {book.image ? (
                   <img
-                    src={`http://localhost:7000/uploads/${book.image}`}
+                    src={`https://books-hlyv.onrender.com/uploads/${book.image}`}
                     alt={book.bookName}
                     className="w-full h-40 object-contain rounded-md mb-3"
                   />
                 ) : (
                   <p className="text-gray-500">No Image</p>
                 )}
-                <h2 className="text-lg font-semibold text-[#271138] line-clamp-2">
+                <h2 className="text-lg font-semibold text-black line-clamp-2">
                   {book.bookName}
                 </h2>
-                <h1 className="text-[#f79c29] text-sm mb-2 line-clamp-2">
+                <h1 className="text-[#3F5678] text-sm mb-2 line-clamp-2">
                   {book.authorName}
                 </h1>
                 {book.pdf && (
                   <button
                     onClick={() => handleReadNowClick(book.pdf)}
-                    className="w-full absolute bottom-3 left-3 max-w-[225px] block text-center bg-[#f79c29] text-white py-2 rounded-md hover:bg-[#271138] transition"
+                    className="w-full absolute bottom-3 left-3 max-w-[225px] block text-center bg-white text-[#3F5678] font-bold py-2 rounded-md hover:bg-[#CCD7E6] transition"
                   >
                     Read Now
                   </button>
@@ -214,6 +214,7 @@ export default function History() {
       </>}
 
       {horrorBooks.length > 0 && <><h2 className="text-2xl font-bold">📚 Horror Books</h2>
+      
         <div className="flex space-x-6 overflow-x-auto scrollbar-hide no-scrollbar p-4 h-[360px] w-[100%]">
           {horrorBooks.length > 0 ? (
             horrorBooks.map((book) => (
@@ -223,23 +224,23 @@ export default function History() {
               >
                 {book.image ? (
                   <img
-                    src={`http://localhost:7000/uploads/${book.image}`}
+                    src={`https://books-hlyv.onrender.com/uploads/${book.image}`}
                     alt={book.bookName}
                     className="w-full h-40 object-contain rounded-md mb-3"
                   />
                 ) : (
                   <p className="text-gray-500">No Image</p>
                 )}
-                <h2 className="text-lg font-semibold text-[#271138] line-clamp-2">
+                <h2 className="text-lg font-semibold text-black line-clamp-2">
                   {book.bookName}
                 </h2>
-                <h1 className="text-[#f79c29] text-sm mb-2 line-clamp-2">
+                <h1 className="text-[#3F5678] text-sm mb-2 line-clamp-2">
                   {book.authorName}
                 </h1>
                 {book.pdf && (
                   <button
                     onClick={() => handleReadNowClick(book.pdf)}
-                    className="w-full absolute bottom-3 left-3 max-w-[225px] block text-center bg-[#f79c29] text-white py-2 rounded-md hover:bg-[#271138] transition"
+                    className="w-full absolute bottom-3 left-3 max-w-[225px] block text-center bg-white text-[#3F5678] font-bold py-2 rounded-md hover:bg-[#CCD7E6] transition"
                   >
                     Read Now
                   </button>
@@ -249,7 +250,8 @@ export default function History() {
           ) : (
             <p className="text-[#271138] text-center">No books available</p>
           )}
-        </div></>}
+        </div>
+        </>}
 
       {communicationBooks.length > 0 && (
         <>
@@ -263,23 +265,23 @@ export default function History() {
                 >
                   {book.image ? (
                     <img
-                      src={`http://localhost:7000/uploads/${book.image}`}
+                      src={`https://books-hlyv.onrender.com/uploads/${book.image}`}
                       alt={book.bookName}
                       className="w-full h-40 object-contain rounded-md mb-3"
                     />
                   ) : (
                     <p className="text-gray-500">No Image</p>
                   )}
-                  <h2 className="text-lg font-semibold text-[#271138] line-clamp-2">
+                  <h2 className="text-lg font-semibold text-black line-clamp-2">
                     {book.bookName}
                   </h2>
-                  <h1 className="text-[#f79c29] text-sm mb-2 line-clamp-2">
+                  <h1 className="text-[#3F5678] text-sm mb-2 line-clamp-2">
                     {book.authorName}
                   </h1>
                   {book.pdf && (
                     <button
                       onClick={() => handleReadNowClick(book.pdf)}
-                      className="w-full absolute bottom-3 left-3 max-w-[225px] block text-center bg-[#f79c29] text-white py-2 rounded-md hover:bg-[#271138] transition"
+                      className="w-full absolute bottom-3 left-3 max-w-[225px] block text-center bg-white text-[#3F5678] font-bold py-2 rounded-md hover:bg-[#CCD7E6] transition"
                     >
                       Read Now
                     </button>
@@ -304,23 +306,23 @@ export default function History() {
                 >
                   {book.image ? (
                     <img
-                      src={`http://localhost:7000/uploads/${book.image}`}
+                      src={`https://books-hlyv.onrender.com/uploads/${book.image}`}
                       alt={book.bookName}
                       className="w-full h-40 object-contain rounded-md mb-3"
                     />
                   ) : (
                     <p className="text-gray-500">No Image</p>
                   )}
-                  <h2 className="text-lg font-semibold text-[#271138] line-clamp-2">
+                  <h2 className="text-lg font-semibold text-black line-clamp-2">
                     {book.bookName}
                   </h2>
-                  <h1 className="text-[#f79c29] text-sm mb-2 line-clamp-2">
+                  <h1 className="text-[#3F5678] text-sm mb-2 line-clamp-2">
                     {book.authorName}
                   </h1>
                   {book.pdf && (
                     <button
                       onClick={() => handleReadNowClick(book.pdf)}
-                      className="w-full absolute bottom-3 left-3 max-w-[225px] block text-center bg-[#f79c29] text-white py-2 rounded-md hover:bg-[#271138] transition"
+                      className="w-full absolute bottom-3 left-3 max-w-[225px] block text-center bg-white text-[#3F5678] font-bold py-2 rounded-md hover:bg-[#CCD7E6] transition"
                     >
                       Read Now
                     </button>
@@ -345,23 +347,23 @@ export default function History() {
                 >
                   {book.image ? (
                     <img
-                      src={`http://localhost:7000/uploads/${book.image}`}
+                      src={`https://books-hlyv.onrender.com/uploads/${book.image}`}
                       alt={book.bookName}
                       className="w-full h-40 object-contain rounded-md mb-3"
                     />
                   ) : (
                     <p className="text-gray-500">No Image</p>
                   )}
-                  <h2 className="text-lg font-semibold text-[#271138] line-clamp-2">
+                  <h2 className="text-lg font-semibold text-black line-clamp-2">
                     {book.bookName}
                   </h2>
-                  <h1 className="text-[#f79c29] text-sm mb-2 line-clamp-2">
+                  <h1 className="text-[#3F5678] text-sm mb-2 line-clamp-2">
                     {book.authorName}
                   </h1>
                   {book.pdf && (
                     <button
                       onClick={() => handleReadNowClick(book.pdf)}
-                      className="w-full absolute bottom-3 left-3 max-w-[225px] block text-center bg-[#f79c29] text-white py-2 rounded-md hover:bg-[#271138] transition"
+                      className="w-full absolute bottom-3 left-3 max-w-[225px] block text-center bg-white text-[#3F5678] font-bold py-2 rounded-md hover:bg-[#CCD7E6] transition"
                     >
                       Read Now
                     </button>
@@ -386,23 +388,23 @@ export default function History() {
                 >
                   {book.image ? (
                     <img
-                      src={`http://localhost:7000/uploads/${book.image}`}
+                      src={`https://books-hlyv.onrender.com/uploads/${book.image}`}
                       alt={book.bookName}
                       className="w-full h-40 object-contain rounded-md mb-3"
                     />
                   ) : (
                     <p className="text-gray-500">No Image</p>
                   )}
-                  <h2 className="text-lg font-semibold text-[#271138] line-clamp-2">
+                  <h2 className="text-lg font-semibold text-black line-clamp-2">
                     {book.bookName}
                   </h2>
-                  <h1 className="text-[#f79c29] text-sm mb-2 line-clamp-2">
+                  <h1 className="text-[#3F5678] text-sm mb-2 line-clamp-2">
                     {book.authorName}
                   </h1>
                   {book.pdf && (
                     <button
                       onClick={() => handleReadNowClick(book.pdf)}
-                      className="w-full absolute bottom-3 left-3 max-w-[225px] block text-center bg-[#f79c29] text-white py-2 rounded-md hover:bg-[#271138] transition"
+                      className="w-full absolute bottom-3 left-3 max-w-[225px] block text-center bg-white text-[#3F5678] font-bold py-2 rounded-md hover:bg-[#CCD7E6] transition"
                     >
                       Read Now
                     </button>

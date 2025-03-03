@@ -30,7 +30,7 @@ const App = () => {
   };
 
   return (
-    <BrowserRouter>
+    <>
       <Navbar onLogout={handleLogout} />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -47,7 +47,7 @@ const App = () => {
       </Routes>
 
       <Footer />
-    </BrowserRouter>
+    </>
   );
 };
 

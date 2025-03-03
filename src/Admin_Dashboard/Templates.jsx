@@ -14,7 +14,7 @@ const Templates = () => {
 
   const fetchImages = async () => {
     try {
-      const { data } = await axios.get('http://localhost:7000/images');
+      const { data } = await axios.get('https://books-hlyv.onrender.com/images');
       setImages(data.map(img => img.url));
     } catch (error) {
       console.error("Error fetching images:", error);
@@ -40,7 +40,7 @@ const Templates = () => {
     formData.append('image', selectedImage);
 
     try {
-      await axios.post('http://localhost:7000/upload', formData, {
+      await axios.post('https://books-hlyv.onrender.com/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       setSelectedImage(null);
